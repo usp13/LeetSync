@@ -2,29 +2,33 @@ class Solution {
 public:
     int minimumPushes(string word) {
         
-
-        int n = word.size() ; 
         // STARTING FROM 2 , UPTIL 9 , we will assign 1-1 letters of the word to all the KEYS, and then add extra letters to the already occupied ones.
 
-        unordered_map<int,int> mp ;
+        // HASHMAP for storing alphabet frequency 
+        
+        vector<int> mp(26 , 0 ) ; // frequency of all alphabets
+
         int ans = 0 ; 
 
-        int key = 2 ; // Default starting value
+        for( char & ch : word ){
+            mp[ch - 'a']++ ;
+        }
 
-        for( char &ch : word ){
+        // SORT based on Frequency
 
-            if( key > 9 ){ // when all keys are given 
-                key = 2 ; 
-            }
+        sort( mp.begin() , mp.end() , greater<int>()) ; // Descending Order
 
-            mp[key]++  ;
+        for( int i = 0 ; i < 26 ; i++ ){
 
-            ans += mp[key] ; 
+            int freq = mp[i] ; // freq 
 
-            key++ ; 
-        } 
+            int press = i/8 + 1 ; // Max no. of keys is 8
 
-        return ans ; 
+            ans += ( press * freq ) ; 
+
+        }
+
+        return ans; 
 
 
     }
