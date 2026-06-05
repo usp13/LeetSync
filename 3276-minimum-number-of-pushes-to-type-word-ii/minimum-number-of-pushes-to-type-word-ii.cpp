@@ -2,32 +2,41 @@ class Solution {
 public:
     int minimumPushes(string word) {
 
-        // HASHMAP for storing alphabet frequency 
-        
-        vector<int> mp(26 , 0 ) ; // frequency of all alphabets
+        vector<int> freq(26, 0);
 
-        int ans = 0 ; 
+        int maxFreq = 0;
 
-        for( char & ch : word ){
-            mp[ch - 'a']++ ;
+        // Count frequencies
+        for(char ch : word) {
+            freq[ch - 'a']++;
+            maxFreq = max(maxFreq, freq[ch - 'a']);
         }
 
-        // SORT based on Frequency
+        // Bucket sort frequencies
+        vector<int> bucket(maxFreq + 1, 0);
 
-        sort( mp.begin() , mp.end() , greater<int>()) ; // Descending Order
-
-        for( int i = 0 ; i < 26 ; i++ ){
-
-            int freq = mp[i] ; // freq 
-
-            int press = i/8 + 1 ; // Max no. of keys is 8
-
-            ans += ( press * freq ) ; 
-
+        for(int f : freq) {
+            if(f > 0) {
+                bucket[f]++;
+            }
         }
 
-        return ans; 
+        int ans = 0;
+        int rank = 0; // position among used letters
 
-        
+        // Process frequencies from largest to smallest
+        for(int f = maxFreq; f >= 1; f--) {
+
+            while(bucket[f]--) {
+
+                int press = rank / 8 + 1;
+
+                ans += press * f;
+
+                rank++;
+            }
+        }
+
+        return ans;
     }
 };
