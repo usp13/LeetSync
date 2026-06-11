@@ -11,42 +11,41 @@
  */
 class Solution {
 public:
-    int prevorder = 0 ; 
+    int prevorder = 0;
 
     int kthSmallest(TreeNode* root, int k) {
 
-        if( root == NULL ){
-            return -1 ; 
+        if (root == NULL) {
+            return -1;
         }
 
-        //LEFT 
-        if( root -> left != NULL ){
+        // Traverse left subtree
+        if (root->left != NULL) {
 
-            int leftans = kthSmallest( root -> left , k ) ;  
+            int leftans = kthSmallest(root->left, k);
 
-            if( leftans != -1 ){
-                return leftans ; 
+            if (leftans != -1) {
+                return leftans;
             }
-
-        }
-        
-        if( prevorder + 1 == k ){
-            return root->val ; 
         }
 
-        prevorder = prevorder + 1; 
-        
-        // RIGHT
-        if( root -> right != NULL ){
+        // Current node is the kth visited node
+        if (prevorder + 1 == k) {
+            return root->val;
+        }
 
-            int rightans = kthSmallest( root -> right , k ) ;  
+        prevorder++;
 
-            if( rightans != -1 ){
-                return rightans ; 
+        // Traverse right subtree
+        if (root->right != NULL) {
+
+            int rightans = kthSmallest(root->right, k);
+
+            if (rightans != -1) {
+                return rightans;
             }
-
         }
 
-        return -1 ; 
+        return -1;
     }
 };
