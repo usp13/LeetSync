@@ -1,1 +1,1 @@
-<h2>kth-smallest-element-in-a-bst Notes</h2><hr>[ Time taken: 16hrs 42m 5s ]
+<h2>kth-smallest-element-in-a-bst Notes</h2><hr>[ Time taken: 16hrs 44m 56s ]
