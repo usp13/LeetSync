@@ -2,9 +2,12 @@ class Solution {
 public:
 
         
-    void bfs( unordered_map<int,vector<int>> mp , int u , vector<bool>& visited ){
+    void bfs( vector<vector<int>>& isConnected , int u , vector<bool>& visited ){
 
         queue<int> q;
+        int n = isConnected.size() ; 
+
+
 
         q.push(u) ; 
         visited[u] = true  ;
@@ -13,9 +16,9 @@ public:
             int curr = q.front() ; 
             q.pop() ; 
 
-            for( int &v : mp[curr] ){
-                if( !visited[v] ){
-                    bfs( mp , v , visited ) ; 
+            for( int v = 0 ; v < n ; v++ ){
+                if( !visited[v] && isConnected[u][v] == 1 ){
+                    bfs( isConnected , v , visited ) ; 
                 }
             }
 
@@ -24,19 +27,6 @@ public:
     int findCircleNum(vector<vector<int>>& isConnected) {
 
         int n = isConnected.size() ; 
-
-        unordered_map<int , vector<int>> mp ; // Map for adjacency
-
-        for( int i = 0 ; i < n ; i++ ){
-            for( int j = 0 ; j < n ; j++ ){
-                if( isConnected[i][j] == 1 ){
-
-                    mp[i].push_back(j) ; 
-                    mp[j].push_back(i) ; 
-
-                }
-            }
-        }
         
         vector<bool> visited(  n , false ) ; 
         int count = 0 ; 
@@ -44,7 +34,7 @@ public:
         for( int i = 0 ; i < n ; i++ ){
 
             if( !visited[i] ){
-                bfs( mp , i , visited ) ;
+                bfs( isConnected , i , visited ) ;
                 count++ ; 
             }
         }
