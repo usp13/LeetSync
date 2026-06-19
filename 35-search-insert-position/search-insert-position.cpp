@@ -26,10 +26,7 @@ public:
         // int answerLowerbound = LOWERBOUND(nums, n , target);
 
         // return answerLowerbound ;
-        
-
-
-
+    
         // BINARY SEARCH 
         int n = nums.size();
         int l = 0;
