@@ -4,10 +4,10 @@ public:
 
         int n = text.length() ;   
 
-        unordered_map<char,int> mp ; 
+        unordered_map<char,int> mp(26) ; 
 
-        for( int i = 0 ; i < n ; i++ ){
-            mp[text[i]]++ ; 
+       for(char ch : text) {
+            mp[ch]++;
         }
 
         int possible = min({ mp['b'], mp['a'],
