@@ -26,9 +26,12 @@ public:
 
     }
 
+    // Acts as DP 
+    unordered_map<string,int> mp  ; 
+
     int solve(vector<string>& arr , string temp , int i , int n ){
 
-        // Normal Recursion : might get TLE 
+        // DP : Normal Recursion + Memoisation
 
         if( i >=  n ){
             return temp.length() ; 
@@ -36,6 +39,10 @@ public:
 
         int take = 0 ; 
         int nottake = 0 ; 
+
+        if( mp.find(temp) != mp.end() ){ // if stored , return it
+            return mp[temp] ; 
+        }
 
 
         if( hasDuplicate( arr[i] , temp) ) { // If has duplicate , go for nottake part only
@@ -47,11 +54,9 @@ public:
 
             nottake = solve( arr , temp , i+1 , n ) ; 
             take = solve( arr , temp + arr[i] , i+1 , n ) ; 
-
-
         }
 
-        return max( take , nottake ) ; 
+        return mp[temp] = max( take , nottake ) ; // update it in MAP
 
     }
 
