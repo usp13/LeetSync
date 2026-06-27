@@ -1,41 +1,47 @@
 class Solution {
 public:
-    map<long long, int> cnt;
-    map<long long, int> dp;
+    int maximumLength(vector<int>& nums) {
 
-    int solve(long long x) {
+        int n = nums.size() ; 
         
-        
-        // DP has value
-        if (dp.count(x))
-            return dp[x];
-
         int ans = 1;
 
-        // We can place two x's and continue to x²
-        if (cnt[x] >= 2 && x <= LLONG_MAX / x && cnt.count(x * x)) {
+        unordered_map<long long,int> mp;
 
-            ans = 2 + solve(x * x);
+        for (int i = 0; i < n ; i++)
+        {
+            mp[nums[i]]++;
         }
+        
+        for(auto &pair : mp){
 
-        return dp[x] = ans; // storing value in dp
-    }
+            long long x = pair.first;
 
-    int maximumLength(vector<int>& nums) {
-        for (int x : nums)
-            cnt[x]++;
+            if(x == 1){
 
-        int ans = 0;
+                int oneCount = mp[1];
 
-        // Handle 1 separately
-        if (cnt.count(1)) {
-            int c = cnt[1];
-            ans = max(ans, (c % 2) ? c : c - 1);
-        }
+                if(oneCount % 2 == 0){    
+                    oneCount--;
+                }
 
-        for (auto &[x, f] : cnt) {
-            if (x == 1) continue;
-            ans = max(ans, solve(x));
+                ans = max(ans, oneCount);
+
+                continue;
+            }
+
+            int currLen = 0;
+
+            while(mp[x] >= 2 && mp.find(x * x) != mp.end()){
+                currLen += 2;
+                x = x * x;
+            }
+
+            if(mp.find(x) != mp.end()){
+                currLen++;
+            }
+
+            ans = max(ans, currLen);
         }
 
         return ans;
