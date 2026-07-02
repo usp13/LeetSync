@@ -8,7 +8,7 @@ public:
         
         // Using HASH MAP - > O(n^2)
       
-        map<vector<int> , int> mp ; 
+        map< vector<int> , int> mp ; 
 
         // Adding all the rows in MAP
         for( int r = 0 ; r < n ; r++ ){
