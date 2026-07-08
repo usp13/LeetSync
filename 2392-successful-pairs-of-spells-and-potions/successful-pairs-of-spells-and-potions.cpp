@@ -1,5 +1,30 @@
 class Solution {
 public:
+
+    int solvelowerbound( int l , int r , vector<int>& potions , int minpotion  ){
+
+        // Binary Search
+        int possibleidx = -1 ; 
+
+        int mid = 0 ; 
+
+        while( l <= r ){
+
+            mid = l + (r-l) / 2 ; 
+
+            if( potions[mid] >= minpotion ){
+                possibleidx = mid ; 
+                r = mid - 1 ; 
+            }
+            else {
+                l = mid + 1 ; 
+            }
+
+        }
+
+        return possibleidx ; 
+    }
+
     vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success) {
         
         int m = spells.size() ; 
@@ -22,8 +47,8 @@ public:
                 continue ; 
             }
 
-            int idx = lower_bound( potions.begin() , potions.end() , minpotion ) - potions.begin() ; 
-            // Built-in cpp STL
+            int idx = solvelowerbound( 0 , n-1 , potions , minpotion ) ; 
+            //Custon made lower bound method 
 
             int count = n - idx ; 
 
