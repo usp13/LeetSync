@@ -1,30 +1,20 @@
 class Solution {
 public:
     vector<int> arrayRankTransform(vector<int>& arr) {
-        
-        int n = arr.size() ; 
-        vector<int> temp = arr ; 
 
-        map<int,int> mp ; 
+        // BINARY SEARCH in Lower_bound
+        vector<int> temp = arr;
 
-        sort( temp.begin() , temp.end() ) ; 
+        sort(temp.begin(), temp.end());
 
-        int rank = 1; // Rank starts from 1 
+        temp.erase(unique(temp.begin(), temp.end()), temp.end());
 
-        for( int i = 0 ; i < n ; i++ ){
+        for (int i = 0; i < arr.size(); i++) {
 
-            if( !mp.count(temp[i]) ){
+            arr[i] = lower_bound(temp.begin(), temp.end(), arr[i]) - temp.begin() + 1;
 
-                mp[temp[i]] = rank ;
-                rank++ ; 
-
-            }
         }
 
-        for( int i = 0 ; i < n ; i++ ){
-            arr[i] = mp[arr[i]] ;
-        }
-
-        return arr ; 
+        return arr;
     }
 };
