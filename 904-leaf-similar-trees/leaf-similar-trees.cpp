@@ -12,33 +12,29 @@
 class Solution {
 public:
 
-    void inorder(TreeNode* root , string &s  ){
+    void inorder(TreeNode* root, vector<int> &leaf) {
 
-        if( root == NULL ) return ; 
+        if (root == NULL) return;
 
-        if( root->left == NULL && root->right == NULL ){
-            s += to_string(root->val) + "_" ; 
-            return ; 
+        if (root->left == NULL && root->right == NULL) {
+            leaf.push_back(root->val);
+            return;
         }
-        
-        inorder( root->left , s ) ;
-        inorder( root->right , s ) ;
 
+        inorder(root->left, leaf);
+        inorder(root->right, leaf);
     }
 
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
 
-        // Traverse to all the tree's leaf and compare 
+        // Traverse both trees and collect all leaf nodes
 
-        string s1 = "" ; 
-        string s2 = "" ; 
+        vector<int> leaf1;
+        vector<int> leaf2;
 
-        inorder( root1 , s1 ) ;
-        inorder( root2 , s2 ) ;
+        inorder(root1, leaf1);
+        inorder(root2, leaf2);
 
-        if( s1 == s2 ) return true ;
-
-        return false ; 
-        
+        return leaf1 == leaf2;
     }
 };
