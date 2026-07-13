@@ -2,34 +2,24 @@ class Solution {
 public:
     vector<int> sequentialDigits(int low, int high) {
 
-        //QUEUE
-        queue<int> q ; 
-
-        for( int i = 1 ; i <= 8 ; i++ ){
-            q.push(i) ; 
-        }
-
+        string s = "123456789" ;
+        int n = s.length() ;  
         vector<int> ans ; 
 
-        while( !q.empty() ){
+        for( int i = 2 ; i <= n ; i++ ){
+            for( int start = 0 ; start <= n - i ; start++ ){
 
-            int temp = q.front() ; 
-            q.pop() ; 
+                string temp = s.substr( start , i ) ; 
 
-            if( temp >= low && temp <= high ){
-                ans.push_back( temp ) ; 
-            }
+                int poss = stoi( temp ) ; 
 
-            int lastdigit = temp%10 ; // last digit of the number 
-            
-            if( lastdigit + 1 <= 9 ){
-                q.push(temp*10 + (lastdigit + 1 ) ) ; 
+                if( poss >= low && poss <= high ){
+                    ans.push_back(poss) ; 
+                }
+
             }
         }
 
         return ans ; 
-
-
-        
     }
 };
