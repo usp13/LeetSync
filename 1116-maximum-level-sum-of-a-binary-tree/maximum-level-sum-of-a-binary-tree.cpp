@@ -11,50 +11,43 @@
  */
 class Solution {
 public:
+    map<int,int> mp ;
+
+    void DFS (TreeNode* root , int level ){
+
+        if( root == NULL ) return ; 
+
+        mp[level] += root->val ; 
+
+        DFS( root->left  , level + 1 ) ; 
+
+        DFS( root->right , level + 1 ) ; 
+
+    } 
+
     int maxLevelSum(TreeNode* root) {
         
-        int maxi = INT_MIN ;
-        int ans = 0 ; // Minimum level 
+        // DFS Approach 
+        mp.clear() ; 
 
+        DFS( root , 1 ) ; 
 
-        // BFS approach : With QUEUE
-        queue<TreeNode*> q ; 
-        q.push( root ) ; 
+        int maxsum = INT_MIN ; 
 
-        int currlevel = 1;  
+        int ans = 0 ; 
 
-        while( !q.empty() ){
+        for( auto &it : mp ){ // MAP : { level , sum }
 
-            int n = q.size() ;
+            int level = it.first ; 
+            int sum = it.second ; 
 
-            int sum = 0  ;
-
-            while( n -- ){// Traversing the current level
-
-                TreeNode* temp = q.front() ;
-                q.pop() ; 
-
-                sum += temp->val ; // add the value 
-
-                if( temp->left ){ // if left child
-                    q.push(temp->left ) ; // push left child
-                }
-
-                if( temp->right ){ // if right child
-                    q.push(temp->right ) ; // push right child
-                }
-
+            if( sum > maxsum ){
+                maxsum = sum ; 
+                ans = level ; 
             }
 
-            if( sum > maxi ) {
-                maxi = sum ;
-                ans = currlevel ; 
-            }
-
-            currlevel ++ ; 
         }
 
-        return ans ;
-
+        return ans ; 
     }
 };
