@@ -13,8 +13,8 @@ public:
         int steps = 0 ;
 
         //BFS
-                    q.push({entrance[0], entrance[1]});
-            maze[entrance[0]][entrance[1]] = '+';
+        q.push({entrance[0], entrance[1]});
+        maze[entrance[0]][entrance[1]] = '+';
 
             while(!q.empty()){
 
@@ -36,7 +36,7 @@ public:
 
                         if(i1 >= 0 && i1 < m &&
                         j1 >= 0 && j1 < n &&
-                        maze[i1][j1] == '.'){
+                        maze[i1][j1] != '+'){
 
                             maze[i1][j1] = '+';
                             q.push({i1, j1});
@@ -47,7 +47,7 @@ public:
                 steps++;
             }
 
-            return -1;
+        return -1;
        
     }
         
