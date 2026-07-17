@@ -2,9 +2,8 @@ class Solution {
 public:
     string reverseParentheses(string s) {
     
-        // USEINGSTACK BRUTE FORCE
-
-        int n = s.length() ;
+        // USING STACK BRUTE FORCE
+        
         string ans = "" ; 
         stack<int> lastskip ; // stores length of elements before the closing bracket
 
