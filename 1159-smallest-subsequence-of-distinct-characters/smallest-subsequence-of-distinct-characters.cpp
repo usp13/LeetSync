@@ -2,6 +2,10 @@ class Solution {
 public:
     string smallestSubsequence(string s) {
         
+
+        // Same as LEETCODE 316. Remove Duplicate Letters
+
+
         vector<int> last(26);
         vector<bool> visited(26);
 
@@ -25,10 +29,11 @@ public:
 
             ans.push_back(s[i]) ;
             visited[s[i] - 'a'] = true ;
+
         }
 
         return ans ;
-        
+
     }
 };
 
