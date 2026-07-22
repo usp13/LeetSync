@@ -21,6 +21,7 @@ public:
         }
 
         int l = solve( root->left ) ; // left side 
+        
         int r = solve( root->right ) ; // right side 
 
         int bothpart = l + r + root->val ; // CASE 1
