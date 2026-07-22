@@ -33,6 +33,7 @@ public:
         TreeNode* root = new TreeNode( rootval ) ;
 
         root->left = solve(preorder , inorder , start , i - 1 , idx) ; // left = From start to i-1 
+        
         root->right = solve(preorder , inorder , i + 1, end, idx) ; 
         // right = From i+1 to end
 
