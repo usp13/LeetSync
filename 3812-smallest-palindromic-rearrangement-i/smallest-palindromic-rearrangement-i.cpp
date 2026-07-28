@@ -1,23 +1,28 @@
 class Solution {
 public:
     string smallestPalindrome(string s) {
-        
-        // Palindrome is exactly the mirror from the center 
-        // Sort the half and paste the revese of that half on the backside
 
-        int n = s.length() ; 
+        vector<int> freq(26, 0);
 
-        int mid = n / 2 ; 
+        for (char c : s) freq[c - 'a']++;
 
-        sort( s.begin() , s.begin() + mid ) ;  // sorted the half
+        string left = "";
 
-        for( int i = 0 ; i < mid ; i++ ){
+        string middle = "";
 
-            s[ n-1-i ] = s[i] ; // pushing the last half same as the firsthalf
+        for (int i = 0; i < 26; i++) {
 
+            left.append(freq[i] / 2, char('a' + i));
+
+            if (freq[i] % 2) middle = char('a' + i);
+       
         }
 
-        return s ; 
+        string right = left;
+
+        reverse(right.begin(), right.end());
+
+        return left + middle + right;
 
     }
 };
