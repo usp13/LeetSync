@@ -1,6 +1,9 @@
 class Solution {
 public:
 
+
+    // TIME COMPLEXITY = O( N! ) or O( N factorial )
+
     int N ;
     vector<vector<string>>  ans ; 
 
@@ -48,7 +51,7 @@ public:
 
         for( int col = 0 ; col < N ; col ++ ){
 
-            if( isvalid( board , row , col )){
+            if( isvalid( board , row , col )){ // if its SAFE to put the queen 
 
                 board[row][col] = 'Q' ; // Place the queen 
 
