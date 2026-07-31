@@ -27,10 +27,14 @@ public:
             TreeNode* node = q.front();
             q.pop();
 
-            // Swap children
-            TreeNode* temp = node->left;
-            node->left = node->right;
-            node->right = temp;
+            // // Swap children
+            // TreeNode* temp = node->left;
+            // node->left = node->right;
+            // node->right = temp;
+
+            // SWAP fumction
+            swap(node->left, node->right);
+            
 
             // ADD LEFT AND RIGHT TO THE QUEUE
             if (node->left != NULL) {
