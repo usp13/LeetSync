@@ -2,7 +2,6 @@ class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
 
-            
         //KADANE's ALGO 
 
         int maxsum = nums[0]  ; // initialise with first value
@@ -21,7 +20,6 @@ public:
         }
 
         return maxsum ; 
-        
         
     }
 };
