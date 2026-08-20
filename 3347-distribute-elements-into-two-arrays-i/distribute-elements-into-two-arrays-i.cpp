@@ -17,13 +17,11 @@ public:
             else {
                 arr2.push_back( nums[i] ) ; 
             }
-            
-        }  
 
-        for( auto val : arr2 ){
-            arr1.push_back(val) ; // append arr1 with arr2
         }
-
+    
+        arr1.insert( arr1.end() , arr2.begin() , arr2.end()) ;  // append arr1 with arr2
+        
         return arr1 ; 
         
     }
