@@ -9,23 +9,29 @@ public:
 
         if( n == 0) return 0 ; 
 
-        sort(nums.begin() , nums.end()) ; 
-        int lastsmall = INT_MIN ; 
         int longest = 1 ; 
         int count = 0 ; 
 
-        for( int i = 0 ; i < n ; i++ ){
+        unordered_set<int> st  ;
 
-            if(  lastsmall == nums[i] - 1 ){
-                count += 1 ; 
-                lastsmall = nums[i] ; 
-            }
-            else if( lastsmall != nums[i] ){
-                count = 1 ; 
-                lastsmall = nums[i] ; 
-            }
+        for( int i = 0; i < n ; i++ ){
+            st.insert( nums[i] ) ; 
+        }
 
-            longest = max( longest , count ) ; 
+        for( auto it : st ){
+            
+            if( st.find(it - 1) == st.end() ){
+
+                int count = 1 ; 
+                int x = it ;
+
+                while( st.find( x + 1 ) != st.end() ){
+                    x = x + 1 ; 
+                    count = count + 1 ; 
+                }  
+
+                longest = max(longest , count) ; 
+            }
         }
 
         return longest ; 
