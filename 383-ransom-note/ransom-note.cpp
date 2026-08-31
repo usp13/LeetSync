@@ -2,28 +2,21 @@ class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
 
-        int m = ransomNote.size();
-        int n = magazine.size();
+        unordered_map<char, int> mp;
 
-        vector<int> freq(26, 0);
-
-        // Count characters available in magazine
-        for (int i = 0; i < n; i++) {
-            freq[magazine[i] - 'a']++;
+        // Count characters in magazine
+        for (char ch : magazine) {
+            mp[ch]++;
         }
 
-        // Use characters to construct ransomNote
-        for (int i = 0; i < m; i++) {
+        // Check if ransomNote can be constructed
+        for (char ch : ransomNote) {
 
-            int index = ransomNote[i] - 'a';
-
-            // Character not available
-            if (freq[index] == 0) {
+            if (mp[ch] == 0) { // if not present
                 return false;
             }
 
-            // Consume the character
-            freq[index]--;
+            mp[ch]--; // decrement the count onec found the character
         }
 
         return true;
