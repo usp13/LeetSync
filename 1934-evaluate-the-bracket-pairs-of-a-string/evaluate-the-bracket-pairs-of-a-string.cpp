@@ -2,47 +2,36 @@ class Solution {
 public:
     string evaluate(string s, vector<vector<string>>& knowledge) {
         
-        unordered_map<string, string> mp;
+        int n = s.length() ;
 
-        // Store knowledge in map
-        for (auto &it : knowledge) {
-            mp[it[0]] = it[1];
+        unordered_map<string,string> mp ; 
+
+        for( auto &i : knowledge ){
+            mp[i[0]] = i[1] ; 
         }
 
-        string ans = "";
-        string temp = "";
+        string ans = ""  ;
+        int i = 0 ;
 
-        int n = s.length();
-        int i = 0;
+        while( i < n ){
 
-        bool isopenbracket = false; // keeps track of open bracket
+            if( s[i] == '('){
+                int j = s.find( ")" , i + 1 ) ; // gets the first occurance of closing bracket  
 
-        while (i < n) {
+                string temp = s.substr( i + 1 , j - i - 1 ) ; 
 
-            if (s[i] == '(') {
-                isopenbracket = true;
+                ans += mp.count(temp) ? mp[temp] : "?" ; 
+
+                i = j ; 
+            }
+            else { // Alphabet 
+                ans.push_back( s[i] ) ; 
             }
 
-            else if (s[i] == ')') {
+            i++ ; 
+        } 
 
-                isopenbracket = false;
+        return ans ; 
 
-                ans += mp.count(temp) ? mp[temp] : "?";
-
-                temp = ""; // empty temp
-            }
-
-            else if (isopenbracket == true) {
-                temp.push_back(s[i]);
-            }
-
-            else {
-                ans.push_back(s[i]);
-            }
-
-            i++; // move to next character
-        }
-
-        return ans;
     }
 };
