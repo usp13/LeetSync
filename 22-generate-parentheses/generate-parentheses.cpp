@@ -15,6 +15,7 @@ void generate ( string &s , int open , int close ){
     if( open > 0){ // if opening brakets are  on zero
         
         s.push_back('(') ;
+
         generate( s , open - 1 , close );
         
         s.pop_back();
@@ -32,7 +33,7 @@ void generate ( string &s , int open , int close ){
        
         string s ;
 
-        generate ( s , n , n );
+        generate( s , n , n );
         
         return valid ;
     }
