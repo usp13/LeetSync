@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int minInsertions(string s) {
+
+        int n = s.length() ; 
+        int open = 0 ; 
+        int ans = 0;
+
+        for (int i = 0; i < n ; i++) {
+
+            if (s[i] == '('){
+                open ++ ;
+            } 
+            else {
+                // Step 1: make a "))"
+                if (i + 1 < s.size() && s[i + 1] == ')') {
+                    i++ ; 
+                }
+            
+                else ans++;
+
+                // Step 2: find its '('
+
+                if (open > 0) open--;
+                
+                else ans++;
+            }
+        }
+
+        return ans + open * 2;
+    }
+};
